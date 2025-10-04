@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "LaoShanghai.Core": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:4266;http://localhost:4272"
+    }
+  }
+}

@@ -1,0 +1,86 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32014.148
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{EB007E40-2478-4017-91E9-4C0967D7135F}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{D590CD2C-50F7-4E98-BE57-7EFDA7EB8806}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Host", "Host", "{6962EC98-990B-4A26-82A9-FF1C0D73A931}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{7D2D8F9E-69FF-40B8-9923-F916F77CA04E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{54DEE85A-812A-4D44-B723-0F9B9409C562}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{1F0B5CE5-C8EB-4914-BF92-0B7974F98B14}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LaoShanghai.Shared", "Core\LaoShanghai.Shared\LaoShanghai.Shared.csproj", "{69DE7540-2E39-4BCD-9B07-138666272779}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LaoShanghai.Domain", "Core\LaoShanghai.Domain\LaoShanghai.Domain.csproj", "{1F1BEE58-97B7-4E25-8FE9-8799E7F11A72}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LaoShanghai.Core", "Core\LaoShanghai.Core\LaoShanghai.Core.csproj", "{79BA5B32-CAC0-4ECA-8398-FA65BE612030}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LaoShanghai.Serverless.Functions", "Azure Functions\LaoShanghai.Serverless.Functions\LaoShanghai.Serverless.Functions.csproj", "{CF9BB9D4-72F9-4376-99EA-8148484877D8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LaoShanghai.Host", "Host\LaoShanghai.Host\LaoShanghai.Host.csproj", "{7CF883E0-71FB-4BB1-B1CF-249283977FC7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LaoShanghai.Infrastructure", "Infrastructure\LaoShanghai.Infrastructure\LaoShanghai.Infrastructure.csproj", "{39613F85-83C3-4E59-B03B-17FABFDBE7B9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LaoShanghai.Tests", "Tests\LaoShanghai.Tests\LaoShanghai.Tests.csproj", "{4F4B3C52-60E3-4651-B8A0-F501B57A1758}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{69DE7540-2E39-4BCD-9B07-138666272779}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{69DE7540-2E39-4BCD-9B07-138666272779}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{69DE7540-2E39-4BCD-9B07-138666272779}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{69DE7540-2E39-4BCD-9B07-138666272779}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F1BEE58-97B7-4E25-8FE9-8799E7F11A72}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F1BEE58-97B7-4E25-8FE9-8799E7F11A72}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F1BEE58-97B7-4E25-8FE9-8799E7F11A72}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F1BEE58-97B7-4E25-8FE9-8799E7F11A72}.Release|Any CPU.Build.0 = Release|Any CPU
+		{79BA5B32-CAC0-4ECA-8398-FA65BE612030}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79BA5B32-CAC0-4ECA-8398-FA65BE612030}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79BA5B32-CAC0-4ECA-8398-FA65BE612030}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79BA5B32-CAC0-4ECA-8398-FA65BE612030}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF9BB9D4-72F9-4376-99EA-8148484877D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF9BB9D4-72F9-4376-99EA-8148484877D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF9BB9D4-72F9-4376-99EA-8148484877D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF9BB9D4-72F9-4376-99EA-8148484877D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7CF883E0-71FB-4BB1-B1CF-249283977FC7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7CF883E0-71FB-4BB1-B1CF-249283977FC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7CF883E0-71FB-4BB1-B1CF-249283977FC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7CF883E0-71FB-4BB1-B1CF-249283977FC7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{39613F85-83C3-4E59-B03B-17FABFDBE7B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39613F85-83C3-4E59-B03B-17FABFDBE7B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39613F85-83C3-4E59-B03B-17FABFDBE7B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39613F85-83C3-4E59-B03B-17FABFDBE7B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4F4B3C52-60E3-4651-B8A0-F501B57A1758}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F4B3C52-60E3-4651-B8A0-F501B57A1758}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F4B3C52-60E3-4651-B8A0-F501B57A1758}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F4B3C52-60E3-4651-B8A0-F501B57A1758}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{69DE7540-2E39-4BCD-9B07-138666272779} = {7D2D8F9E-69FF-40B8-9923-F916F77CA04E}
+		{1F1BEE58-97B7-4E25-8FE9-8799E7F11A72} = {7D2D8F9E-69FF-40B8-9923-F916F77CA04E}
+		{79BA5B32-CAC0-4ECA-8398-FA65BE612030} = {7D2D8F9E-69FF-40B8-9923-F916F77CA04E}
+		{CF9BB9D4-72F9-4376-99EA-8148484877D8} = {1F0B5CE5-C8EB-4914-BF92-0B7974F98B14}
+		{7CF883E0-71FB-4BB1-B1CF-249283977FC7} = {6962EC98-990B-4A26-82A9-FF1C0D73A931}
+		{39613F85-83C3-4E59-B03B-17FABFDBE7B9} = {54DEE85A-812A-4D44-B723-0F9B9409C562}
+		{4F4B3C52-60E3-4651-B8A0-F501B57A1758} = {D590CD2C-50F7-4E98-BE57-7EFDA7EB8806}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A74B54FC-F43B-4520-8B62-63B070A075E8}
+	EndGlobalSection
+EndGlobal
