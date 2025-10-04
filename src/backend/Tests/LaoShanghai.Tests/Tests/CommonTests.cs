@@ -5,8 +5,7 @@ namespace LaoShanghai.Tests
 {
     public class CommonTests
     {
-        // private readonly string _sendGridApiKey = "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";
-
+        
         private readonly ITestOutputHelper _output;
 
         // ctor

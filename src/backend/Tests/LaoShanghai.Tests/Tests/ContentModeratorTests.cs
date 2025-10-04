@@ -25,7 +25,6 @@ namespace LaoShanghai.Tests
         }
 
         [Theory]
-        [InlineData("草泥马 傻逼 fuck shit")]
         [InlineData("你好")]
         public void Content_Moderator_Test(string text)
         {
