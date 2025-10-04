@@ -6,6 +6,7 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{EB007E40-2478-4017-91E9-4C0967D7135F}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
+		push_image_ACR.ps1 = push_image_ACR.ps1
 		README.md = README.md
 	EndProjectSection
 EndProject

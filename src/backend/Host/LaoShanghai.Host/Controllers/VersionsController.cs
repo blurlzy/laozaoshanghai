@@ -11,7 +11,7 @@ namespace LaoShanghai.Host.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public IActionResult GetVersion()
         {
-            return Ok(new { version = "LaozaoShanghai Service v2.0" });
+            return Ok(new { version = "LaozaoShanghai Service v2.1" });
         }
 
 
