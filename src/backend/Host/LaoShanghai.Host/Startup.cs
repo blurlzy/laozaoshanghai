@@ -14,6 +14,7 @@ namespace LaoShanghai.Host
                            {
                                builder.WithOrigins("http://localhost:4200",
                                                    "https://app-laozaoshanghai-web-prod.azurewebsites.net",
+                                                   "https://aca-laozaoshanghai-api.jollyflower-2b3452a1.eastasia.azurecontainerapps.io",
                                                    "http://laozaoshanghai.com",
                                                    "https://laozaoshanghai.com",
                                                    "http://www.laozaoshanghai.com",
