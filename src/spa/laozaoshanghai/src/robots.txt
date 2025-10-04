@@ -1,0 +1,6 @@
+# Robots.txt file for laozaoshanghai.com
+
+User-agent: *
+Allow: /
+
+Sitemap: https://laozaoshanghai.com/sitemap.xml
