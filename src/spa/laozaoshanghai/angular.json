@@ -29,6 +29,7 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
+              "src/staticwebapp.config.json",
               "src/sitemap.xml",
               "src/ads.txt",
               "src/robots.txt"
