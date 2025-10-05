@@ -7,10 +7,11 @@ Backend: Powered by ASP.NET Core 8.0, ensuring high performance and scalability.
 
 Database: Securely stores data in Azure Cosmos DB for reliability and flexibility.
 
-## LaozaoShanghai Website
+## Live website
 [https://laozaoshanghai.com/](https://laozaoshanghai.com/) 
 
 
 ![LaozaoShanghai](https://stlaoshanghaiprod.blob.core.windows.net/photos/laozaoshanghai_1.png)
+![LaozaoShanghai](https://stlaoshanghaiprod.blob.core.windows.net/photos/laozaoshanghai_2.png)
 
 
