@@ -11,9 +11,9 @@ import { ContentItem } from '../content-item.model';
 import { SnackbarService } from '../../shared/services/snackbar.service';
 
 @Component({
-    selector: 'app-content-card',
-    imports: [CommonModule, RouterModule, MatButtonModule, MatIconModule, MatTooltipModule],
-    template: `
+  selector: 'app-content-card',
+  imports: [CommonModule, RouterModule, MatButtonModule, MatIconModule, MatTooltipModule],
+  template: `
     <div class="card material-card border-0 rounded-4">		
       <a (click)="showContent(content)" style="cursor: pointer;">
         <img
@@ -49,7 +49,7 @@ import { SnackbarService } from '../../shared/services/snackbar.service';
       </div>
     </div>
   `,
-    styles: `
+  styles: `
 
   `
 })
@@ -58,11 +58,26 @@ export class ContentCardComponent {
   @Output() openContentSidenav = new EventEmitter<any>();
   @Output() openCommentSidenav = new EventEmitter<any>();
 
+  // preload images
+  private preloadedImages: HTMLImageElement[] = [];
+
   // ctor
   constructor(private router: Router,
-              private clipboard: Clipboard,
-              private snackbarService: SnackbarService) {
+    private clipboard: Clipboard,
+    private snackbarService: SnackbarService) {
 
+  }
+
+  ngOnInit(): void {
+    if (!this.content.mediaItems || this.content.mediaItems.length === 0) {
+      return;
+    }
+    // Preload all images -  All images are preloaded in ngOnInit so they're cached by the browser
+    this.content.mediaItems.forEach((img: any) => {
+      const image = new Image();
+      image.src = img.url;
+      this.preloadedImages.push(image);
+    });
   }
 
   // public methods
@@ -80,15 +95,15 @@ export class ContentCardComponent {
   }
 
   // copy url to clipboard
-	copyToClipboard(item: ContentItem): void {
-		// route to the detail page
-		const url = this.router.serializeUrl(
-			this.router.createUrlTree(['/info', item.id])
-		);
-		
-		this.clipboard.copy(window.origin + url);
-		this.snackbarService.success('该链接已经复制到剪贴板');
-	}
+  copyToClipboard(item: ContentItem): void {
+    // route to the detail page
+    const url = this.router.serializeUrl(
+      this.router.createUrlTree(['/info', item.id])
+    );
+
+    this.clipboard.copy(window.origin + url);
+    this.snackbarService.success('该链接已经复制到剪贴板');
+  }
 
   // open detail screen in a new window
   open(item: ContentItem): void {
