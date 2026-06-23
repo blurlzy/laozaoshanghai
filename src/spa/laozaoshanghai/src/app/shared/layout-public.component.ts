@@ -32,9 +32,9 @@ import { AdsResponsiveComponent } from '../public/components/ads-responsive.comp
         </a> 
       </p>
     </div>
-    <div class="mt-3 container">
+    <!-- <div class="mt-3 container">
       <app-ads-responsive></app-ads-responsive>    
-    </div>
+    </div> -->
   </div>
   `,
     styles: `    
