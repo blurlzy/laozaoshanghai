@@ -68,9 +68,9 @@ import { AdsResponsiveComponent } from '../components/ads-responsive.component';
 						}	
 						
 						<!-- ads -->
-						<div class="card material-card border-0 rounded-4 mt-3 py-3 d-none d-sm-block">
+						<!-- <div class="card material-card border-0 rounded-4 mt-3 py-3 d-none d-sm-block">
 							<app-ads-responsive></app-ads-responsive>
-						</div>
+						</div> -->
 					</div>
 
 					<div class="col-lg-12">
