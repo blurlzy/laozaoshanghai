@@ -20,5 +20,8 @@
 
         // send grid
         public static readonly string SendGridApiKey = "sendGridApiKey";
-    }
+
+          // bundle license for auto mapper & mediatR
+          public static readonly string BundleLicense = "BundleLic";
+     }
 }

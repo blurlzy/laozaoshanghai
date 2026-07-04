@@ -38,6 +38,9 @@ namespace LaoShanghai.Core.Content.ContentItems
 
             // convert data
             var data = _mapper.Map<IReadOnlyCollection<ContentItem>, IReadOnlyCollection<ContentItemDto>>(searchResult.Data);
+
+            // todo: replace original blob storage urls with cdn urls
+
             return new PagedList<ContentItemDto>(searchResult.Total, data);
         }
     }

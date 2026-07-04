@@ -34,7 +34,7 @@ builder.Services.ConfigureContenteModerator(builder.Configuration[KeyVaultSecret
                                             builder.Configuration[KeyVaultSecretKeys.ContentModeratorEndpoint]);
 
 // core services, auto mapper, mediatR..etc
-builder.Services.ConfigureCoreServices();
+builder.Services.ConfigureCoreServices(builder.Configuration[KeyVaultSecretKeys.BundleLicense]);
 
 // email services
 builder.Services.ConfigureSendGrid(builder.Configuration[KeyVaultSecretKeys.SendGridApiKey]);

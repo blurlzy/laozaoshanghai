@@ -22,12 +22,12 @@ import { CommentListComponent } from '../components/comment-list.component';
 import { CommentFormComponent } from '../components/comment-form.component';
 import { ImgSliderComponent } from '../components/img-slider.component';
 import { TagListComponent } from '../components/tag-list.component';
-import { AdsResponsiveComponent } from '../components/ads-responsive.component';
+// import { AdsResponsiveComponent } from '../components/ads-responsive.component';
 
 @Component({
     selector: 'app-default-screen',
     imports: [CommonModule, ReactiveFormsModule, MatSidenavModule, MatPaginatorModule, MatButtonModule, MatIconModule,
-        ContentCardComponent, AdsResponsiveComponent, CommentListComponent, CommentFormComponent, ImgSliderComponent, TagListComponent],
+        ContentCardComponent,  CommentListComponent, CommentFormComponent, ImgSliderComponent, TagListComponent],
     template: `
 	<mat-drawer-container autosize [hasBackdrop]="(isHandset$ | async) ? true : false" class="container-bgcolor">
 		<!-- sidenav (panel)-->

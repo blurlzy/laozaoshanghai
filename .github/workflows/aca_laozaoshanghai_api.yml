@@ -21,7 +21,8 @@ jobs:
       - name: Build and deploy Container App
         uses: azure/container-apps-deploy-action@v1
         with:
-          appSourcePath: ${{ github.workspace }}/src
+          appSourcePath: ${{ github.workspace }}/src/backend # ← build context = src/backend/
+          dockerfilePath: Host/LaoShanghai.Host/Dockerfile  # relative to appSourcePath
           acrName: acrzl
           imageToBuild: acrzl.azurecr.io/laozaoshanghai-api:${{ github.sha }}
           containerAppName: aca-laozaoshanghai-api
