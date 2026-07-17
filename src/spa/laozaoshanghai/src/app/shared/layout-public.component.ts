@@ -26,7 +26,7 @@ import { HeaderPublicComponent } from './header-public.component';
     <!-- footer -->
     <div class="rights bg-white">
       <p>
-        Created by LaozaoShanghai © 2023, 
+        Created by LaozaoShanghai © 2026 
         <a href="https://twitter.com/laozaoshanghai" target="_blank" class="text-secondary">
           Follow us <i class="bi bi-twitter-x"></i>
         </a> 

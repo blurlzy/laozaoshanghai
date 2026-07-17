@@ -46,7 +46,7 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
         </mat-menu>
         
         <button mat-button routerLink="/about">关于</button>
-        <a mat-button href="https://zongyi.me/" target="_blank">Blog</a>
+        <!-- <a mat-button href="https://zongyi.me/" target="_blank">Blog</a> -->
 
         <div class="nav me-auto my-2 my-lg-0 navbar-nav-scroll"></div>
         <div class="d-flex">
