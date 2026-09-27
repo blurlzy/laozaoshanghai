@@ -7,11 +7,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { Loader } from './services/loader.service';
 // components
 import { HeaderPublicComponent } from './header-public.component';
-// import { AdsResponsiveComponent } from '../public/components/ads-responsive.component';
+import { AdsResponsiveComponent } from '../public/components/ads-responsive.component';
 
 @Component({
     selector: 'app-layout-public',
-    imports: [CommonModule, RouterOutlet, MatProgressBarModule, MatIconModule, HeaderPublicComponent],
+    imports: [CommonModule, RouterOutlet, MatProgressBarModule, MatIconModule, HeaderPublicComponent, AdsResponsiveComponent],
     template: `
   @if (loader.isLoading | async) {
     <mat-progress-bar mode="indeterminate" color="accent" style="z-index:9999"></mat-progress-bar>
@@ -32,9 +32,9 @@ import { HeaderPublicComponent } from './header-public.component';
         </a> 
       </p>
     </div>
-    <!-- <div class="mt-3 container">
+    <div class="mt-3 container">
       <app-ads-responsive></app-ads-responsive>    
-    </div> -->
+    </div>
   </div>
   `,
     styles: `    
