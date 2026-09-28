@@ -13,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;500;900&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Zhi+Mang+Xing&display=swap" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/style.css" rel="stylesheet">
-  <link href="assets/styles.css?v=8" rel="stylesheet">
+  <link href="assets/styles.css?v=10" rel="stylesheet">
 </head>
 <body>
   <!-- Shared SVG defs: ink filters used across the page -->
@@ -66,7 +66,7 @@
         </div>
       </div>
       <a href="#archive">旧影</a>
-      <a href="#about">关于</a>
+      <a href="#/about">关于</a>
     </nav>
 
     <form class="search" id="searchForm" role="search">
@@ -83,6 +83,8 @@
   </header>
 
   <main>
+    <!-- ═══════════ View: home (#/, #archive, #/p/{id}) ═══════════ -->
+    <div class="view" data-view="home">
     <!-- ─────────── Hero ─────────── -->
     <section class="hero" aria-labelledby="heroTitle">
       <div class="hero__mist" aria-hidden="true"><i></i><i></i><i></i></div>
@@ -132,20 +134,57 @@
         <p class="archive__end" id="archiveEnd" hidden>卷终 · 已是最后一帧</p>
       </div>
     </section>
+    </div>
 
-    <!-- ─────────── About ─────────── -->
-    <section class="about" id="about" aria-labelledby="aboutTitle">
-      <h2 id="aboutTitle" class="about__title">关于<br>老早</h2>
-      <div class="about__body">
-        <p class="about__big">“老早”，是上海话里的<em>从前</em>。</p>
-        <p>这里收集的，大多是二〇〇〇年以前的上海：弄堂口的老虎灶、外滩的钟声、淮海路的霓虹、第一家超市开张时挤满的人潮。它们来自旧书、旧报、家庭相册与热心网友的分享。</p>
-        <p>我们只做一件事——把照片按年代与地区整理好，让它们被再次看见。若您家中也藏着老照片，欢迎投稿；若照片中有您认识的人和地方，也欢迎留言讲讲它的故事。</p>
-        <p class="about__links">
-          <a href="https://twitter.com/laozaoshanghai" target="_blank" rel="noopener">Twitter · @laozaoshanghai</a>
-          <a href="mailto:hello@laozaoshanghai.com">投稿 · 联系</a>
-        </p>
+    <!-- ═══════════ View: about (#/about) ═══════════ -->
+    <div class="view page-about" data-view="about" hidden>
+      <button class="page-close" id="aboutClose" type="button" aria-label="关闭，返回旧影" title="关闭 (Esc)">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"/></svg>
+      </button>
+      <section class="about" aria-labelledby="aboutTitle">
+        <h1 id="aboutTitle" class="about__title">关于<br>老早</h1>
+        <div class="about__body">
+          <p class="about__big">“老早”，是上海话里的<em>从前</em>。</p>
+          <p>这里收集的，大多是二〇〇〇年以前的上海：弄堂口的老虎灶、外滩的钟声、淮海路的霓虹、第一家超市开张时挤满的人潮。本站闲来无事、顺手为之，绝大部分资料来自互联网——旧书、旧报、家庭相册与热心网友的分享。</p>
+          <p>我们只做一件事——把照片按年代与地区整理好，让它们被再次看见。若您家中也藏着老照片，欢迎投稿；若照片中有您认识的人和地方，也欢迎留言讲讲它的故事。</p>
+          <dl class="about__facts">
+            <div><dt>旧影</dt><dd><b id="factPhotos">—</b><small>帧</small></dd></div>
+            <div><dt>上线</dt><dd><b id="factSince">—</b><small>年起</small></dd></div>
+            <div><dt>站务</dt><dd><b id="factLogs">—</b><small>则</small></dd></div>
+          </dl>
+          <p class="about__links">
+            <a href="https://twitter.com/laozaoshanghai" target="_blank" rel="noopener">Twitter · @laozaoshanghai</a>
+            <a href="#contact">投稿 · 来信 ↓</a>
+          </p>
+        </div>
+      </section>
+
+      <div class="about-grid">
+        <!-- Site updates: GET api/activities/site -->
+        <section class="updates" aria-labelledby="updatesTitle">
+          <header class="block-head">
+            <h2 id="updatesTitle">更新日志</h2>
+            <p>站务 · 由近及远</p>
+          </header>
+          <ol class="log" id="siteLog"><li class="log__empty">…</li></ol>
+        </section>
+
+        <!-- Contact: POST api/messages { name, email, content } -->
+        <section class="contact" id="contact" aria-labelledby="contactTitle">
+          <header class="block-head">
+            <h2 id="contactTitle">来信</h2>
+            <p>投稿 · 纠错 · 闲谈</p>
+          </header>
+          <p class="contact__lede">家中若藏着老照片，或认出了照片里的人与地方，都欢迎来信。</p>
+          <form class="contact-form" id="contactForm">
+            <label><span>署名</span><input name="name" maxlength="30" required autocomplete="name"></label>
+            <label><span>Email</span><input name="email" type="email" required autocomplete="email"></label>
+            <label><span>内容</span><textarea name="content" rows="5" maxlength="500" required></textarea></label>
+            <p class="contact-form__foot"><small id="contactCount">0 / 500</small><button type="submit">寄出</button></p>
+          </form>
+        </section>
       </div>
-    </section>
+    </div>
   </main>
 
   <!-- ─────────── Footer: ink-wash Bund skyline ─────────── -->
@@ -195,7 +234,7 @@
           <ol id="vComments"></ol>
           <form id="commentForm" class="comment-form">
             <input name="name" placeholder="署名" maxlength="30" required>
-            <textarea name="commentText" placeholder="讲讲这张照片的故事…" maxlength="500" rows="3" required></textarea>
+            <textarea name="commentText" placeholder="讲讲这张照片的故事…" minlength="3" maxlength="180" rows="3" required></textarea>
             <button type="submit">落款</button>
           </form>
         </section>
@@ -208,7 +247,7 @@
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-  <script src="assets/snapshot.js?v=8"></script>
-  <script src="assets/app.js?v=8"></script>
+  <script src="assets/snapshot.js?v=10"></script>
+  <script src="assets/app.js?v=10"></script>
 </body>
 </html>

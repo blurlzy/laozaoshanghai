@@ -46,7 +46,8 @@
     mode: "unknown",   // unknown → live | snapshot
     filter: null,      // { type: 'era'|'district'|'search', value, label }
     page: 0, total: 0, displayTotal: 0, items: [], loading: false, autoLoads: 0, done: false,
-    interludeIdx: 0,
+    interludeIdx: 0, view: "home",
+    homeScroll: 0, aboutFromHome: false, restoreNext: false,
     viewer: { index: -1, media: 0, item: null },
     reqId: 0,
   };
@@ -189,7 +190,7 @@
   document.addEventListener("click", e => { if (!e.target.closest(".nav__group")) closeMenus(); });
   document.addEventListener("keydown", e => {
     const g = document.querySelector(".nav__group.is-open");
-    if (e.key === "Escape" && g) { closeMenus(); $(".nav__trigger", g).focus(); }
+    if (e.key === "Escape" && g) { e.preventDefault(); closeMenus(); $(".nav__trigger", g).focus(); }
   });
 
   /* ───────────────────────── Archive grid ───────────────────────── */
@@ -296,6 +297,7 @@
 
   function setFilter(f) {
     if (f && state.filter && f.type === state.filter.type && f.value === state.filter.value) f = null; // toggle off
+    if (state.view !== "home") { history.pushState(null, "", location.pathname + location.search); showView("home"); }
     state.filter = f;
     syncActive();
     load({ reset: true });
@@ -329,11 +331,107 @@
   addEventListener("scroll", onScroll, { passive: true }); onScroll();
 
   const navIO = new IntersectionObserver(entries => {
+    if (state.view !== "home") return;
     for (const e of entries) if (e.isIntersecting) {
-      document.querySelectorAll(".nav a").forEach(a => a.classList.toggle("is-current", a.getAttribute("href") === "#" + e.target.id));
+      document.querySelectorAll(".nav > a").forEach(a => a.classList.toggle("is-current", a.getAttribute("href") === "#" + e.target.id));
     }
   }, { rootMargin: "-45% 0px -50% 0px" });
-  ["archive", "about"].forEach(id => navIO.observe(document.getElementById(id)));
+  navIO.observe($("#archive"));
+
+  /* ───────────────────────── Views (hash routes) ───────────────────────── */
+  // #/about → about page; "", #archive, #/p/{id} → home. Other anchors (#top, #contact) just scroll.
+  const viewFor = h => h === "#/about" ? "about" : (!h || h === "#" || h === "#archive" || h.startsWith("#/p/")) ? "home" : null;
+
+  function showView(v, { restore = false } = {}) {
+    if (state.view === v) return false;
+    if (state.view === "home") state.homeScroll = scrollY;
+    state.view = v;
+    document.querySelectorAll("[data-view]").forEach(n => { n.hidden = n.dataset.view !== v; });
+    document.querySelectorAll(".nav > a").forEach(a => a.classList.toggle("is-current", v === "about" && a.getAttribute("href") === "#/about"));
+    closeMenus();
+    document.body.classList.remove("nav-open"); $("#menuBtn").setAttribute("aria-expanded", false);
+    if (v === "about") loadAbout();
+    document.title = v === "about" ? "关于 · 老早上海" : "老早上海 · 上海老照片 · 记忆上海";
+    scrollTo({ top: restore ? state.homeScroll : 0, behavior: "instant" });
+    return true;
+  }
+  function route(e) {
+    const h = location.hash, v = viewFor(h);
+    if (!v) {
+      if (state.view === "about") state.aboutFromHome = false;   // an in-page anchor was pushed on top of #/about
+      return;
+    }
+    const restore = state.restoreNext; state.restoreNext = false;
+    if (v === "about" && state.view === "home") state.aboutFromHome = !!e && viewFor(new URL(e.oldURL).hash) === "home";
+    showView(v, { restore });
+    if (h === "#archive" && !restore) requestAnimationFrame(() => $("#archive").scrollIntoView());
+  }
+  addEventListener("hashchange", route);
+
+  // Close the about page: step back through history when we came from home, otherwise push home.
+  function closeAbout() {
+    if (state.view !== "about") return;
+    if (state.aboutFromHome) { state.restoreNext = true; history.back(); return; }
+    history.pushState(null, "", location.pathname + location.search);
+    showView("home", { restore: true });
+  }
+  $("#aboutClose").addEventListener("click", closeAbout);
+  document.addEventListener("keydown", e => {
+    if (e.key !== "Escape" || state.view !== "about" || e.defaultPrevented) return;
+    if (document.querySelector(".nav__group.is-open") || document.body.classList.contains("nav-open")) return;
+    if (e.target.closest?.("input, textarea, select")) return;
+    closeAbout();
+  });
+
+  /* ───────────────────────── About: facts, update log, contact ───────────────────────── */
+  let aboutLoaded = false;
+  async function loadAbout() {
+    $("#factPhotos").textContent = $("#totalCount").textContent;
+    if (aboutLoaded) return;
+    aboutLoaded = true;
+    let logs;
+    try { logs = await live("activities/site"); }
+    catch { logs = SNAP.activities || []; }
+    renderLog(Array.isArray(logs) ? logs : []);
+  }
+
+  function renderLog(list) {
+    const two = n => String(n).padStart(2, "0");
+    const items = list.map(a => ({ d: new Date(a.dateCreated), text: (a.text || "").trim().replace(/[.．]$/, "。") }))
+      .filter(a => a.text && !isNaN(a.d)).sort((a, b) => b.d - a.d);
+    const years = new Map();
+    for (const it of items) {
+      const y = it.d.getFullYear();
+      if (!years.has(y)) years.set(y, []);
+      years.get(y).push(it);
+    }
+    $("#siteLog").replaceChildren(...(items.length ? [...years].map(([y, list]) => el("li", { class: "log__year" },
+      el("h3", {}, String(y)),
+      el("ol", {}, ...list.map(it => el("li", { class: "log__item" },
+        el("time", { datetime: it.d.toISOString().slice(0, 10) }, `${two(it.d.getMonth() + 1)} · ${two(it.d.getDate())}`),
+        el("p", {}, it.text)))),
+    )) : [el("li", { class: "log__empty" }, "暂无更新")]));
+    $("#factLogs").textContent = items.length || "—";
+    $("#factSince").textContent = items.length ? items[items.length - 1].d.getFullYear() : "—";
+  }
+
+  const contactForm = $("#contactForm");
+  contactForm.content.addEventListener("input", () => { $("#contactCount").textContent = `${contactForm.content.value.length} / 500`; });
+  contactForm.addEventListener("submit", async e => {
+    e.preventDefault();
+    if (state.mode !== "live") { toast("本地预览中，来信请在线提交"); return; }
+    const fd = new FormData(contactForm), btn = $("button", contactForm);
+    btn.disabled = true;
+    try {
+      await live("messages", {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name: fd.get("name"), email: fd.get("email"), content: fd.get("content") }),
+      });
+      contactForm.reset(); $("#contactCount").textContent = "0 / 500";
+      toast("已寄出 · 谢谢来信");
+    } catch { toast("寄出失败，请稍后再试"); }
+    finally { btn.disabled = false; }
+  });
 
   /* ───────────────────────── Viewer ───────────────────────── */
   const dlg = $("#viewer");
@@ -498,6 +596,7 @@
   renderEraMenu();
   renderDistrictMenu();
   $("#totalCount").textContent = fmtNum(SNAP.totals["全部"] || 0);
+  route();
   load({ reset: true }).then(res => {
     startHero(res?.items?.length ? res.items : SNAP.items.map(normalize));
     const m = location.hash.match(/^#\/p\/([\w-]+)/);
