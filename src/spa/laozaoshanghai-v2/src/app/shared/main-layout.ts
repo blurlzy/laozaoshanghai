@@ -8,10 +8,11 @@ import { RouterOutlet, Router } from '@angular/router';
   host: {
     '(document:click)': 'onDocumentClick($event)',
     '(document:keydown.escape)': 'closeMenu()',
+    '(window:scroll)': 'onScroll()',
   },
   styles: ``,
   template: ` 
-  <header class="masthead" id="top">
+  <header class="masthead" id="top" [class.is-scrolled]="isScrolled()">
     <a class="brand" href="#" aria-label="老早上海 · 首页">
       <span class="seal seal--sm" aria-hidden="true">
         <svg viewBox="0 0 100 100"><g filter="url(#seal-grain)">
@@ -21,7 +22,7 @@ import { RouterOutlet, Router } from '@angular/router';
           <text x="31" y="47" class="seal__glyph">上</text><text x="31" y="80" class="seal__glyph">海</text>
         </g></svg>
       </span>
-      <span class="brand__text">老早上海<em>laozao shanghai</em></span>
+      <span class="brand__text">老早上海<em>laozaoshanghai.com</em></span>
     </a>
 
     <nav class="nav" aria-label="主导航">
@@ -89,6 +90,11 @@ import { RouterOutlet, Router } from '@angular/router';
 })
 export class MainLayout {
   readonly openMenu = signal<'era' | 'district' | null>(null);
+  readonly isScrolled = signal(window.scrollY > 24);
+
+  onScroll(): void {
+    this.isScrolled.set(window.scrollY > 24);
+  }
 
   toggleMenu(menu: 'era' | 'district'): void {
     this.openMenu.update(current => (current === menu ? null : menu));
