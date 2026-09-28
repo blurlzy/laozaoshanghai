@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>老早上海 · 上海老照片 · 记忆上海</title>
+  <meta name="description" content="老早上海，一座关于上海旧影的纸上档案。民国、六十年代至九十年代的上海老照片，按年代与地区整理。">
+  <meta name="keywords" content="老上海,老早上海,上海老照片,记忆上海,上海80年代,上海90年代,民国上海">
+  <meta name="theme-color" content="#f2ede3">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='4' y='4' width='56' height='56' rx='6' fill='%23b33a2b'/%3E%3Ctext x='32' y='44' font-size='34' text-anchor='middle' fill='%23f2ede3' font-family='serif' font-weight='900'%3E早%3C/text%3E%3C/svg%3E">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;500;900&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Zhi+Mang+Xing&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/style.css" rel="stylesheet">
+  <link href="assets/styles.css?v=8" rel="stylesheet">
+</head>
+<body>
+  <!-- Shared SVG defs: ink filters used across the page -->
+  <svg class="defs" aria-hidden="true" focusable="false">
+    <filter id="ink-rough" x="-20%" y="-20%" width="140%" height="140%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="3" seed="4" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="10"/>
+    </filter>
+    <filter id="ink-wash" x="-30%" y="-30%" width="160%" height="160%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.012" numOctaves="4" seed="9" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="60" result="d"/>
+      <feGaussianBlur in="d" stdDeviation="14"/>
+    </filter>
+    <filter id="seal-grain">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="2" result="n"/>
+      <feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -3.2 2.55" result="m"/>
+      <feComposite in="SourceGraphic" in2="m" operator="in" result="c"/>
+      <feTurbulence type="fractalNoise" baseFrequency="0.06" numOctaves="2" seed="7" result="n2"/>
+      <feDisplacementMap in="c" in2="n2" scale="1.6"/>
+    </filter>
+  </svg>
+
+  <!-- ─────────── Header ─────────── -->
+  <header class="masthead" id="top">
+    <a class="brand" href="#" aria-label="老早上海 · 首页">
+      <span class="seal seal--sm" aria-hidden="true">
+        <svg viewBox="0 0 100 100"><g filter="url(#seal-grain)">
+          <rect x="4" y="4" width="92" height="92" rx="7" fill="var(--cinnabar)"/>
+          <rect x="11" y="11" width="78" height="78" rx="3" fill="none" stroke="var(--paper)" stroke-width="2.4"/>
+          <text x="69" y="47" class="seal__glyph">老</text><text x="69" y="80" class="seal__glyph">早</text>
+          <text x="31" y="47" class="seal__glyph">上</text><text x="31" y="80" class="seal__glyph">海</text>
+        </g></svg>
+      </span>
+      <span class="brand__text">老早上海<em>Lao Zao Shanghai</em></span>
+    </a>
+
+    <nav class="nav" id="mainNav" aria-label="主导航">
+      <div class="nav__group" data-type="era">
+        <button class="nav__trigger" type="button" aria-expanded="false" aria-controls="menuEras">年代</button>
+        <div class="nav__panel nav__panel--eras" id="menuEras">
+          <p class="nav__panel-note">按年代 · 由近及远</p>
+          <ul class="menu-eras" id="eraMenu"></ul>
+        </div>
+      </div>
+      <div class="nav__group" data-type="district">
+        <button class="nav__trigger" type="button" aria-expanded="false" aria-controls="menuDistricts">地区</button>
+        <div class="nav__panel nav__panel--districts" id="menuDistricts">
+          <p class="nav__panel-note">旧区名 · 以当年为准</p>
+          <ul class="menu-districts" id="districtMenu"></ul>
+        </div>
+      </div>
+      <a href="#archive">旧影</a>
+      <a href="#about">关于</a>
+    </nav>
+
+    <form class="search" id="searchForm" role="search">
+      <label for="q" class="sr-only">搜索</label>
+      <input id="q" name="q" type="search" placeholder="寻一处旧地…" autocomplete="off">
+      <button type="submit" aria-label="搜索">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21"/></svg>
+      </button>
+    </form>
+
+    <button class="menu-btn" id="menuBtn" type="button" aria-label="菜单" aria-expanded="false" aria-controls="mainNav">
+      <i></i><i></i>
+    </button>
+  </header>
+
+  <main>
+    <!-- ─────────── Hero ─────────── -->
+    <section class="hero" aria-labelledby="heroTitle">
+      <div class="hero__mist" aria-hidden="true"><i></i><i></i><i></i></div>
+
+      <aside class="hero__aside" aria-hidden="true">
+        <span>上海老照片</span><span class="dot">·</span><span>记忆上海</span>
+      </aside>
+
+      <figure class="hero__frame">
+        <div class="hero__photo" id="heroPhoto"></div>
+        <figcaption class="hero__caption">
+          <span class="num" id="heroNum">№ 0001</span>
+          <span class="txt" id="heroCaption">…</span>
+        </figcaption>
+      </figure>
+
+      <div class="hero__title-wrap">
+        <h1 class="hero__title" id="heroTitle">
+          <span style="--i:0">老</span><span style="--i:1">早</span><span style="--i:2">上</span><span style="--i:3">海</span>
+        </h1>
+        <p class="hero__years">一九一二 — 一九九九</p>
+        <span class="seal seal--lg stamp" aria-hidden="true">
+          <svg viewBox="0 0 100 100"><g filter="url(#seal-grain)">
+            <rect x="4" y="4" width="92" height="92" rx="7" fill="var(--cinnabar)"/>
+            <text x="50" y="66" text-anchor="middle" class="seal__glyph seal__glyph--one">憶</text>
+          </g></svg>
+        </span>
+      </div>
+
+      <div class="hero__foot">
+        <p class="hero__count"><span class="brush">旧影</span><b id="totalCount">2757</b><span>帧</span></p>
+        <p class="hero__lede">一座关于上海的纸上档案。<br>从民国的石库门，到九十年代的淮海路——<br>把散落的记忆，一帧一帧收回来。</p>
+        <a class="scroll-hint" href="#archive"><span>展卷</span><i></i></a>
+      </div>
+    </section>
+
+    <!-- ─────────── Archive ─────────── -->
+    <section class="archive" id="archive" aria-labelledby="archiveTitle">
+      <div class="archive__bar">
+        <h2 id="archiveTitle">旧影<em>Archive</em></h2>
+        <div class="filter" id="filterState" aria-live="polite"></div>
+        <p class="archive__meta" id="archiveMeta"></p>
+      </div>
+      <div class="grid" id="grid"></div>
+      <div class="archive__more">
+        <button class="btn-ink" id="loadMore" type="button"><span>续展</span><small>更多旧影</small></button>
+        <p class="archive__end" id="archiveEnd" hidden>卷终 · 已是最后一帧</p>
+      </div>
+    </section>
+
+    <!-- ─────────── About ─────────── -->
+    <section class="about" id="about" aria-labelledby="aboutTitle">
+      <h2 id="aboutTitle" class="about__title">关于<br>老早</h2>
+      <div class="about__body">
+        <p class="about__big">“老早”，是上海话里的<em>从前</em>。</p>
+        <p>这里收集的，大多是二〇〇〇年以前的上海：弄堂口的老虎灶、外滩的钟声、淮海路的霓虹、第一家超市开张时挤满的人潮。它们来自旧书、旧报、家庭相册与热心网友的分享。</p>
+        <p>我们只做一件事——把照片按年代与地区整理好，让它们被再次看见。若您家中也藏着老照片，欢迎投稿；若照片中有您认识的人和地方，也欢迎留言讲讲它的故事。</p>
+        <p class="about__links">
+          <a href="https://twitter.com/laozaoshanghai" target="_blank" rel="noopener">Twitter · @laozaoshanghai</a>
+          <a href="mailto:hello@laozaoshanghai.com">投稿 · 联系</a>
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <!-- ─────────── Footer: ink-wash Bund skyline ─────────── -->
+  <footer class="footer">
+    <svg class="skyline" viewBox="0 0 1440 260" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+      <g filter="url(#ink-wash)" opacity=".18">
+        <path d="M0 200 C160 140 260 170 380 130 S620 150 760 110 S1040 160 1180 120 S1360 140 1440 120 V260 H0Z" fill="var(--ink)"/>
+      </g>
+      <g filter="url(#ink-rough)" fill="var(--ink)" opacity=".82">
+        <path d="M0 260 V214 h60 v-18 h30 v18 h40 v-40 h14 v-10 h8 v10 h14 v40 h36 v-26 h50 v26 h26
+                 v-66 h8 v-26 l10 -14 l10 14 v26 h8 v66 h30 v-34 h70 v34 h22 v-52 h16 v-8 h24 v8 h16 v52
+                 h30 v-30 h56 v30 h34 v-72 h6 v-18 h4 v-22 h4 v22 h4 v18 h6 v72 h40 v-40 h62 v40 h30 v-22 h44 v22
+                 h40 v-48 h52 v48 h60 v-28 h40 v28 h70 v-24 h60 v24 h80 v-16 h60 v16 h90 V260Z"/>
+        <!-- Oriental Pearl tower, a nod to the original logo -->
+        <path d="M1182 214 V120 h3 V60 h2 V18 h2 v42 h2 v60 h3 v94z"/>
+        <circle cx="1188" cy="132" r="15"/><circle cx="1188" cy="78" r="9"/><circle cx="1188" cy="48" r="4"/>
+        <path d="M1172 214 l12 -78 h8 l12 78z"/>
+      </g>
+      <path d="M0 238 C240 230 480 246 720 238 S1200 230 1440 238 V260 H0Z" fill="var(--ink)" opacity=".9"/>
+    </svg>
+    <div class="footer__row">
+      <span>© 老早上海 laozaoshanghai.com</span>
+      <span class="footer__mid">照片版权归原作者所有 · 仅作记忆与交流之用</span>
+      <a href="#top">回到卷首 ↑</a>
+    </div>
+  </footer>
+
+  <!-- ─────────── Viewer (detail) ─────────── -->
+  <dialog class="viewer" id="viewer" aria-labelledby="viewerText">
+    <div class="viewer__inner">
+      <div class="viewer__stage">
+        <button class="viewer__nav viewer__nav--prev" id="vPrev" type="button" aria-label="上一帧">‹</button>
+        <figure class="viewer__figure" id="vFigure" tabindex="-1"><img id="vImg" alt=""></figure>
+        <button class="viewer__nav viewer__nav--next" id="vNext" type="button" aria-label="下一帧">›</button>
+        <ol class="viewer__thumbs" id="vThumbs" aria-label="本组照片"></ol>
+      </div>
+      <aside class="viewer__side">
+        <p class="viewer__num" id="vNum"></p>
+        <p class="viewer__text" id="viewerText"></p>
+        <ul class="viewer__tags" id="vTags"></ul>
+        <div class="viewer__actions">
+          <button type="button" id="vShare">分享</button>
+          <a id="vOpen" href="#" target="_blank" rel="noopener">原图</a>
+        </div>
+        <section class="viewer__comments" aria-label="留言">
+          <h3>留言</h3>
+          <ol id="vComments"></ol>
+          <form id="commentForm" class="comment-form">
+            <input name="name" placeholder="署名" maxlength="30" required>
+            <textarea name="commentText" placeholder="讲讲这张照片的故事…" maxlength="500" rows="3" required></textarea>
+            <button type="submit">落款</button>
+          </form>
+        </section>
+      </aside>
+      <button class="viewer__close" id="vClose" type="button" aria-label="关闭">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"/></svg>
+      </button>
+    </div>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="assets/snapshot.js?v=8"></script>
+  <script src="assets/app.js?v=8"></script>
+</body>
+</html>
