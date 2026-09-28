@@ -1,9 +1,10 @@
 import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet, Router } from '@angular/router';
-
+// components
+import { Footer } from './footer';
 @Component({
-  imports: [RouterOutlet],
+  imports: [CommonModule, RouterOutlet, Footer],
   selector: 'app-main-layout',
   host: {
     '(document:click)': 'onDocumentClick($event)',
@@ -82,10 +83,12 @@ import { RouterOutlet, Router } from '@angular/router';
 
   <main> 
     <div class="view" data-view="home">
-      
+      <!-- Router outlet for the main content -->
       <router-outlet></router-outlet>
     </div>    
   </main>
+
+  <app-footer></app-footer>
   `,
 })
 export class MainLayout {

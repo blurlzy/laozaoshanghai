@@ -22,6 +22,9 @@
   --f-brush: "Zhi Mang Xing", "LXGW WenKai", cursive;
 
   --gutter: clamp(20px, 4.2vw, 64px);
+  --content-max: 1380px;
+  /* Side padding that keeps content within --content-max while the section itself stays full-bleed. */
+  --content-pad: max(var(--gutter), calc((100% - var(--content-max)) / 2));
   --head-h: 72px;
   --ease: cubic-bezier(.2, .7, .1, 1);
   --ease-ink: cubic-bezier(.65, 0, .35, 1);
@@ -189,7 +192,7 @@ body.nav-open .menu-btn i:last-child { transform: translateY(-3.5px) rotate(-45d
   grid-template-columns: 44px minmax(0, 1fr) auto;
   grid-template-rows: 1fr auto;
   column-gap: clamp(24px, 4vw, 72px);
-  padding: calc(var(--head-h) + 28px) var(--gutter) 40px;
+  padding: calc(var(--head-h) + 28px) var(--content-pad) 40px;
   isolation: isolate;
 }
 .hero__mist { position: absolute; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
@@ -250,7 +253,7 @@ body.nav-open .menu-btn i:last-child { transform: translateY(-3.5px) rotate(-45d
 .hero__title {
   margin: 0; writing-mode: vertical-rl;
   font-family: var(--f-display); font-weight: 900;
-  font-size: clamp(76px, 10.5vw, 176px); line-height: 1; letter-spacing: .02em;
+  font-size: clamp(56px, 7vw, 120px); line-height: 1; letter-spacing: .02em;
 }
 .hero__title span {
   display: inline-block; opacity: 0;
@@ -293,7 +296,7 @@ body.nav-open .menu-btn i:last-child { transform: translateY(-3.5px) rotate(-45d
 @keyframes fade { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
 
 /* ─────────── Archive ─────────── */
-.archive { padding: clamp(64px, 10vh, 120px) var(--gutter) 60px; }
+.archive { padding: clamp(64px, 10vh, 120px) var(--content-pad) 60px; }
 .archive__bar {
   position: sticky; top: var(--head-h); z-index: 20;
   display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 28px;
@@ -645,7 +648,7 @@ body.nav-open .menu-btn i:last-child { transform: translateY(-3.5px) rotate(-45d
 
   .hero { grid-template-columns: 1fr; grid-template-rows: auto auto auto; padding-top: calc(var(--head-h) + 12px); row-gap: 20px; min-height: auto; }
   .hero__title-wrap { grid-column: 1; grid-row: 1; justify-self: stretch; padding-top: 8px; flex-direction: column; align-items: flex-start; gap: 6px; }
-  .hero__title { font-size: min(19vw, 104px); writing-mode: horizontal-tb; letter-spacing: .04em; white-space: nowrap; }
+  .hero__title { font-size: min(14vw, 76px); writing-mode: horizontal-tb; letter-spacing: .04em; white-space: nowrap; }
   .hero__years { writing-mode: horizontal-tb; margin: 0; font-size: 12px; letter-spacing: .5em; }
   .hero__title-wrap .stamp { left: auto; right: 0; bottom: 4px; top: auto; width: 46px; height: 46px; }
   .hero__frame { grid-row: 2; }
