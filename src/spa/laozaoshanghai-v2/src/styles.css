@@ -22,7 +22,7 @@
   --f-brush: "Zhi Mang Xing", "LXGW WenKai", cursive;
 
   --gutter: clamp(20px, 4.2vw, 64px);
-  --content-max: 1380px;
+  --content-max: 1580px;
   /* Side padding that keeps content within --content-max while the section itself stays full-bleed. */
   --content-pad: max(var(--gutter), calc((100% - var(--content-max)) / 2));
   --head-h: 72px;
