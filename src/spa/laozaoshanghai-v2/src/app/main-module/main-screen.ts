@@ -19,7 +19,10 @@ import { MainSection} from './main-section';
 
     <section class="archive" #archive aria-labelledby="archiveTitle">
       <div class="archive__bar">
-        <h2 id="archiveTitle">旧影<em>Archive</em></h2>
+        <h2 id="archiveTitle">
+          旧影
+          <!-- <em>Archive</em> -->
+        </h2>
         <div class="filter" aria-live="polite">
           @if (activeKeyword(); as term) {
             <span class="chip">「{{ term }}」<button type="button" aria-label="清除筛选" (click)="clearSearch()">×</button></span>
