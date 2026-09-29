@@ -29,9 +29,9 @@ builder.Services.ConfigureCosmos(builder.Configuration[KeyVaultSecretKeys.Cosmos
 // azure blob services
 builder.Services.ConfigureBlobStorage(builder.Configuration[KeyVaultSecretKeys.StorageConnectionString]);
 
-// content moderator
-builder.Services.ConfigureContenteModerator(builder.Configuration[KeyVaultSecretKeys.ContentModeratorSubKey], 
-                                            builder.Configuration[KeyVaultSecretKeys.ContentModeratorEndpoint]);
+//// content moderator
+//builder.Services.ConfigureContenteModerator(builder.Configuration[KeyVaultSecretKeys.ContentModeratorSubKey], 
+//                                            builder.Configuration[KeyVaultSecretKeys.ContentModeratorEndpoint]);
 
 // core services, auto mapper, mediatR..etc
 builder.Services.ConfigureCoreServices(builder.Configuration[KeyVaultSecretKeys.BundleLicense]);

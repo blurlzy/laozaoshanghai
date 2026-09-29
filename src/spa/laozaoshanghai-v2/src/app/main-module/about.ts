@@ -52,7 +52,7 @@ function groupByYear(activities: SiteActivity[] | null): LogYear[] {
           </dl> -->
           <p class="about__links">
             <a href="https://twitter.com/laozaoshanghai" target="_blank" rel="noopener">Twitter · @laozaoshanghai</a>
-            <a href="mailto:laozaoshanghai@gmail.com">投稿 · 来信 · laozaoshanghai&#64;gmail.com</a>
+            <a href="mailto:laozaoshanghai@gmail.com">投稿 · 来信</a>
           </p>
         </div>
       </section>
