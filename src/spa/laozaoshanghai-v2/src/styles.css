@@ -481,6 +481,21 @@ body.nav-open .menu-btn i:last-child { transform: translateY(-3.5px) rotate(-45d
 }
 .footer__row a:hover { color: var(--paper); }
 
+/* ─────────── Admin ─────────── */
+.admin-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  padding: 8px 16px; border: 1px solid var(--line); border-radius: 3px;
+  font-size: 14px; letter-spacing: .2em; color: var(--ink-2); background: transparent;
+  transition: border-color .3s, color .3s, background .3s;
+}
+.admin-btn:hover { border-color: var(--ink-3); color: var(--ink); }
+.admin-btn:disabled { opacity: .45; pointer-events: none; }
+.admin-btn--primary { border-color: var(--cinnabar); background: var(--cinnabar); color: var(--paper); font-family: var(--f-display); font-weight: 900; }
+.admin-btn--primary:hover { border-color: var(--cinnabar-deep); background: var(--cinnabar-deep); color: var(--paper); }
+.admin-btn--danger { border-color: var(--cinnabar); color: var(--cinnabar); }
+.admin-btn--danger:hover { background: var(--cinnabar); color: var(--paper); border-color: var(--cinnabar); }
+.admin-btn--sm { padding: 4px 10px; font-size: 13px; letter-spacing: .12em; }
+
 /* ─────────── Viewer ─────────── */
 .viewer {
   width: 100vw; height: 100dvh; max-width: none; max-height: none; margin: 0; padding: 0; border: 0;

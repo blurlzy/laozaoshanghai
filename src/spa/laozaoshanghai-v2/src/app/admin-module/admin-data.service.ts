@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { PagedList } from '../shared/models/paged-list.model';
 import { environment } from '../../environments/environment';
-import { ContentItem, Comment } from '../public/content-item.model';
+import { ContentItem, Comment } from '../shared/models/data.model';
 
 @Injectable({ providedIn: 'root' })
 export class ManagementService {
@@ -19,7 +19,7 @@ export class ManagementService {
     getContent(keyword: string | null, pageIndex: number, pageSize: number): Observable<PagedList<ContentItem>> {
         let url = `${this.apiEndpoint}?pageIndex=${pageIndex}&pageSize=${pageSize}`;
         if (keyword) {
-            url += `&keyword=${keyword}`;
+            url += `&keyword=${encodeURIComponent(keyword)}`;
         }
 
         return this.httpClient.get<PagedList<ContentItem>>(url);
