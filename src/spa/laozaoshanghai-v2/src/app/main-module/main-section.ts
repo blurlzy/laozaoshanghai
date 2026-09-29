@@ -17,8 +17,8 @@ import { Component } from '@angular/core';
           <img alt="laozaoshanghai.com" decoding="async" src="https://stlaoshanghaiprod.blob.core.windows.net/photos/5bcc457d-7a37-47a3-9079-50e3ab8effb8.png" class="is-on">
         </div>
         <figcaption class="hero__caption">
-          <span class="num" id="heroNum">建设中的南京东路</span>
-          <span class="txt" id="heroCaption" style="opacity: 1;">Shanghai 1990s</span>
+          <span class="num">建设中的南京东路</span>
+          <span class="txt" style="opacity: 1;">Shanghai 1990s</span>
         </figcaption>
       </figure>
 
