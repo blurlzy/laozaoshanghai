@@ -1,5 +1,5 @@
 import { ApplicationConfig, ErrorHandler, provideBrowserGlobalErrorListeners } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import { provideRouter, withComponentInputBinding } from '@angular/router';
 import { provideHttpClient, withInterceptorsFromDi, HTTP_INTERCEPTORS } from '@angular/common/http';
 //routes
 import { routes } from './app.routes';
@@ -10,7 +10,8 @@ import { GlobalErrorHandler } from './shared/services/error-handler.service';
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
-    provideRouter(routes),
+    // binds route/query params (e.g. ?keyword=) to routed components' inputs
+    provideRouter(routes, withComponentInputBinding()),
     provideHttpClient(
       withInterceptorsFromDi()
     ),

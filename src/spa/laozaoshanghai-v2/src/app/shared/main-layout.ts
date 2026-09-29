@@ -1,6 +1,8 @@
-import { Component, signal } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterOutlet, Router } from '@angular/router';
+import { Component, DestroyRef, effect, inject, signal } from '@angular/core';
+import { CommonModule, DOCUMENT } from '@angular/common';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { ActivatedRoute, RouterOutlet, Router } from '@angular/router';
+import { map } from 'rxjs';
 // components
 import { Footer } from './footer';
 @Component({
@@ -8,7 +10,7 @@ import { Footer } from './footer';
   selector: 'app-main-layout',
   host: {
     '(document:click)': 'onDocumentClick($event)',
-    '(document:keydown.escape)': 'closeMenu()',
+    '(document:keydown.escape)': 'closeMenu(); closeNav()',
     '(window:scroll)': 'onScroll()',
   },
   styles: ``,
@@ -26,7 +28,7 @@ import { Footer } from './footer';
       <span class="brand__text">老早上海<em>laozaoshanghai.com</em></span>
     </a>
 
-    <nav class="nav" aria-label="主导航">
+    <nav class="nav" id="mainNav" aria-label="主导航">
       <div class="nav__group" data-type="era" [class.is-open]="openMenu() === 'era'">
         <button class="nav__trigger" type="button"
           [attr.aria-expanded]="openMenu() === 'era'" aria-controls="menuEras"
@@ -68,15 +70,20 @@ import { Footer } from './footer';
       <a href="#/about">关于</a>
     </nav>
 
-    <form class="search" id="searchForm" role="search">
+    <form class="search" role="search" (submit)="search($event, q)">
       <label for="q" class="sr-only">搜索</label>
-      <input id="q" name="q" type="search" placeholder="搜索…" autocomplete="off">
+      <input #q id="q" name="q" type="search" placeholder="搜索…" autocomplete="off" [value]="currentKeyword()">
       <button type="submit" aria-label="搜索">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"></circle><path d="M15.5 15.5 21 21"></path></svg>
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="10.5" cy="10.5" r="6.5"></circle>
+          <path d="M15.5 15.5 21 21"></path>
+        </svg>
       </button>
     </form>
 
-    <button class="menu-btn" id="menuBtn" type="button" aria-label="菜单" aria-expanded="false" aria-controls="mainNav">
+    <button class="menu-btn" type="button" aria-label="菜单"
+      [attr.aria-expanded]="navOpen()" aria-controls="mainNav"
+      (click)="toggleNav()">
       <i></i><i></i>
     </button>
   </header>
@@ -93,10 +100,42 @@ import { Footer } from './footer';
 })
 export class MainLayout {
   readonly openMenu = signal<'era' | 'district' | null>(null);
+  /** Mobile full-screen nav; styles.css shows it via `body.nav-open`. */
+  readonly navOpen = signal(false);
   readonly isScrolled = signal(window.scrollY > 24);
+
+  private readonly router = inject(Router);
+  /** Keeps the search box in sync with ?keyword= (e.g. on refresh, Back, or clearing the filter). */
+  readonly currentKeyword = toSignal(
+    inject(ActivatedRoute).queryParamMap.pipe(map(params => params.get('keyword') ?? '')),
+    { initialValue: '' },
+  );
+
+  constructor() {
+    const body = inject(DOCUMENT).body;
+    effect(() => body.classList.toggle('nav-open', this.navOpen()));
+    inject(DestroyRef).onDestroy(() => body.classList.remove('nav-open'));
+  }
 
   onScroll(): void {
     this.isScrolled.set(window.scrollY > 24);
+  }
+
+  /** Hands the keyword to MainScreen via ?keyword=; an empty search clears the filter. */
+  search(event: Event, input: HTMLInputElement): void {
+    event.preventDefault();
+    const keyword = input.value.trim();
+    input.blur();
+    this.closeNav();
+    this.router.navigate(['/'], { queryParams: { keyword: keyword || null } });
+  }
+
+  toggleNav(): void {
+    this.navOpen.update(open => !open);
+  }
+
+  closeNav(): void {
+    this.navOpen.set(false);
   }
 
   toggleMenu(menu: 'era' | 'district'): void {
@@ -109,9 +148,15 @@ export class MainLayout {
 
   // Close when clicking outside a nav group, or after picking an item inside a panel.
   onDocumentClick(event: MouseEvent): void {
-    if (!this.openMenu()) return;
     const target = event.target as HTMLElement | null;
-    if (!target?.closest('.nav__group') || target.closest('.nav__panel button')) {
+    const pickedItem = !!target?.closest('.nav__panel button, .nav > a');
+
+    if (this.navOpen() && pickedItem) {
+      this.closeNav();
+    }
+
+    if (!this.openMenu()) return;
+    if (!target?.closest('.nav__group') || pickedItem) {
       this.closeMenu();
     }
   }

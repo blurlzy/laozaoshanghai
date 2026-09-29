@@ -20,7 +20,7 @@ export class DataService {
 	getContent(keyword: string | null, pageIndex: number, pageSize: number): Observable<PagedList<ContentItem>> {
 		let url = `${this.apiEndpoint}?pageIndex=${pageIndex}&pageSize=${pageSize}`;
 		if (keyword) {
-			url += `&keyword=${keyword}`;
+			url += `&keyword=${encodeURIComponent(keyword)}`;
 		}
 
 		return this.httpClient.get<PagedList<ContentItem>>(url);

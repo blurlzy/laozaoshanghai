@@ -280,12 +280,13 @@ body.nav-open .menu-btn i:last-child { transform: translateY(-3.5px) rotate(-45d
 
 .hero__foot {
   grid-column: 2; grid-row: 2;
-  display: grid; grid-template-columns: auto 1fr auto; align-items: end; gap: clamp(24px, 5vw, 80px);
+  display: grid; grid-template-columns: auto 1fr auto; align-items: end; gap: clamp(16px, 2vw, 32px);
   padding-top: 28px;
   opacity: 0; animation: fade 1.4s 1.5s var(--ease) forwards;
 }
 .hero__count { margin: 0; display: flex; align-items: baseline; gap: 10px; }
-.hero__count .brush { font-family: var(--f-brush); font-size: 30px; color: var(--cinnabar); transform: rotate(-4deg); display: inline-block; }
+.hero__count > :empty { display: none; }
+.hero__count .brush { font-family: var(--f-brush); font-size: 44px; color: var(--cinnabar); transform: rotate(-4deg); display: inline-block; }
 .hero__count b { font-family: var(--f-latin); font-weight: 500; font-size: clamp(48px, 5vw, 72px); line-height: 1; letter-spacing: -.01em; }
 .hero__count span:last-child { font-size: 15px; color: var(--ink-3); }
 .hero__lede { margin: 0; font-size: 15px; line-height: 2; color: var(--ink-2); max-width: 30em; }
@@ -296,7 +297,7 @@ body.nav-open .menu-btn i:last-child { transform: translateY(-3.5px) rotate(-45d
 @keyframes fade { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
 
 /* ─────────── Archive ─────────── */
-.archive { padding: clamp(64px, 10vh, 120px) var(--content-pad) 60px; }
+.archive { padding: clamp(32px, 5vh, 64px) var(--content-pad) 60px; }
 .archive__bar {
   position: sticky; top: var(--head-h); z-index: 20;
   display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 28px;
@@ -368,10 +369,8 @@ body.nav-open .menu-btn i:last-child { transform: translateY(-3.5px) rotate(-45d
   font-family: var(--f-display); font-weight: 500; font-size: clamp(20px, 1.8vw, 26px); line-height: 1.6;
   letter-spacing: .3em; color: var(--ink-2); text-align: center;
 }
-.interlude p::after {
-  content: ""; flex: none; width: 18px; height: 18px;
-  background: var(--cinnabar); border-radius: 3px; filter: url(#seal-grain);
-}
+.interlude__seal { flex: none; width: 36px; height: 36px; transform: rotate(-4deg); letter-spacing: 0; }
+.interlude__seal .seal__glyph { font-size: 50px; }
 
 .empty { grid-column: 1 / -1; padding: 120px 0; text-align: center; color: var(--ink-3); letter-spacing: .3em; }
 .empty b { display: block; font-family: var(--f-brush); font-size: 56px; color: var(--ink); letter-spacing: .1em; font-weight: 400; margin-bottom: 8px; }

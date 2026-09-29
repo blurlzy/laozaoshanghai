@@ -24,7 +24,10 @@ import { Component } from '@angular/core';
 
       <div class="hero__title-wrap">
         <h1 class="hero__title">
-          <span style="--i:0">老</span><span style="--i:1">早</span><span style="--i:2">上</span><span style="--i:3">海</span>
+          <span style="--i:0">老</span>
+          <span style="--i:1">早</span>
+          <span style="--i:2">上</span>
+          <span style="--i:3">海</span>
         </h1>
         <p class="hero__years">侬好呀</p>
         <span class="seal seal--lg stamp" aria-hidden="true">
@@ -36,7 +39,11 @@ import { Component } from '@angular/core';
       </div>
 
       <div class="hero__foot">
-        <p class="hero__count"><span class="brush">旧影</span><b id="totalCount">2,757</b><span>帧</span></p>
+        <p class="hero__count">
+          <span class="brush">旧影</span>
+          <b></b>
+          <span></span>
+        </p>
         <p class="hero__lede">往事如烟<br>只有咖啡会一直飘香<br>霞飞路上不再有飘落的梧桐树叶</p>
         <a class="scroll-hint" href="#archive"><span>展卷</span><i></i></a>
       </div>
