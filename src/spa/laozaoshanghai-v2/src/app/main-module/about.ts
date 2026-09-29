@@ -52,7 +52,7 @@ function groupByYear(activities: SiteActivity[] | null): LogYear[] {
           </dl> -->
           <p class="about__links">
             <a href="https://twitter.com/laozaoshanghai" target="_blank" rel="noopener">Twitter · @laozaoshanghai</a>
-            <a href="#contact">投稿 · 来信 ↓</a>
+            <a href="mailto:laozaoshanghai@gmail.com">投稿 · 来信 · laozaoshanghai&#64;gmail.com</a>
           </p>
         </div>
       </section>
@@ -62,7 +62,7 @@ function groupByYear(activities: SiteActivity[] | null): LogYear[] {
         <section class="updates" aria-labelledby="updatesTitle">
           <header class="block-head">
             <h2 id="updatesTitle">更新日志</h2>
-            <p>站务 · 由近及远</p>
+            <!-- <p>站务 · 由近及远</p> -->
           </header>
           <ol class="log">
             @if (logYears(); as years) {
@@ -85,21 +85,6 @@ function groupByYear(activities: SiteActivity[] | null): LogYear[] {
               <li class="log__empty">载入中…</li>
             }
           </ol>
-        </section>
-
-        <!-- Contact: POST api/messages { name, email, content } -->
-        <section class="contact" aria-labelledby="contactTitle">
-          <header class="block-head">
-            <h2>来信</h2>
-            <p>投稿 · 纠错 · 闲谈</p>
-          </header>
-          <p class="contact__lede">家中若藏着老照片，或认出了照片里的人与地方，都欢迎来信。</p>
-          <form class="contact-form">
-            <label><span>署名</span><input name="name" maxlength="30" required="" autocomplete="name"></label>
-            <label><span>Email</span><input name="email" type="email" required="" autocomplete="email"></label>
-            <label><span>内容</span><textarea name="content" rows="5" maxlength="500" required=""></textarea></label>
-            <p class="contact-form__foot"><small>0 / 500</small><button type="submit">寄出</button></p>
-          </form>
         </section>
       </div>
     </div>

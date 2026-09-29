@@ -56,7 +56,7 @@ import { ContentItem } from '../shared/models/data.model';
           <button type="button">分享</button>
           <a [href]="currentUrl()" target="_blank" rel="noopener">原图</a>
         </div>
-        <section class="viewer__comments" aria-label="留言">
+        <!-- <section class="viewer__comments" aria-label="留言">
           <h3>留言</h3>
           <ol>
             <li class="muted">本地预览中，留言请在线查看</li>
@@ -66,7 +66,7 @@ import { ContentItem } from '../shared/models/data.model';
             <textarea name="commentText" placeholder="讲讲这张照片的故事…" minlength="3" maxlength="180" rows="3" required=""></textarea>
             <button type="submit">落款</button>
           </form>
-        </section>
+        </section> -->
       </aside>
       <button class="viewer__close" type="button" aria-label="关闭" (click)="close()">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"></path></svg>
