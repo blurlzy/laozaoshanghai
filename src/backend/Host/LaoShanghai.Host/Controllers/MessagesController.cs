@@ -19,14 +19,14 @@
         //    return Ok();
         //}
 
-        [HttpPost]
-        [SwaggerOperation(Tags = new[] { "Messages: Send" })]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> SendAsync([FromBody] SendMessageRequest request)
-        {
-            await base.Mediator.Send(request);
-            return Ok();
-        }
+        //[HttpPost]
+        //[SwaggerOperation(Tags = new[] { "Messages: Send" })]
+        //[ProducesResponseType(StatusCodes.Status200OK)]
+        //[ProducesResponseType(StatusCodes.Status400BadRequest)]
+        //public async Task<IActionResult> SendAsync([FromBody] SendMessageRequest request)
+        //{
+        //    await base.Mediator.Send(request);
+        //    return Ok();
+        //}
     }
 }

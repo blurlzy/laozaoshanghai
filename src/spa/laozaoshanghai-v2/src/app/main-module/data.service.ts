@@ -8,9 +8,9 @@ import { environment } from '../../environments/environment';
 @Injectable({ providedIn: 'root' })
 export class DataService {
 	private apiEndpoint = environment.apiEndpoint + 'api/contentItems';
-	private messageApiEndpoint = environment.apiEndpoint + 'api/messages';
+	// private messageApiEndpoint = environment.apiEndpoint + 'api/messages';
 	private activityApiEndpoint = environment.apiEndpoint + 'api/activities';
-	private commentEndpoint = environment.apiEndpoint + 'api/comments';
+	// private commentEndpoint = environment.apiEndpoint + 'api/comments';
 	// ctor
 	constructor(private httpClient: HttpClient) {
 
@@ -41,18 +41,18 @@ export class DataService {
 		return this.httpClient.get<Comment[]>(this.apiEndpoint + `/${contentId}/comments`);
 	}
 
-	// add comment
-	addComment(newComment:any): Observable<{}> {
-		return this.httpClient.post(this.commentEndpoint, newComment);
-	}
+	// // add comment
+	// addComment(newComment:any): Observable<{}> {
+	// 	return this.httpClient.post(this.commentEndpoint, newComment);
+	// }
 
-	// get site updats
+	// get site updates
 	getSiteUpdates(): Observable<SiteActivity[]> {
 		return this.httpClient.get<SiteActivity[]>(this.activityApiEndpoint + '/site');
 	}
 
-	// send message
-	sendMessage(message: any): Observable<{}> {
-		return this.httpClient.post(this.messageApiEndpoint, message);
-	}
+	// // send message
+	// sendMessage(message: any): Observable<{}> {
+	// 	return this.httpClient.post(this.messageApiEndpoint, message);
+	// }
 }

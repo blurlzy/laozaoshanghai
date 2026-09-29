@@ -29,16 +29,16 @@
             return await base.Mediator.Send(request);
         }
 
-        // Allow anonymous users to leave the comments. Those comments will not be visible until they are reviewed and approved
-        [HttpPost]
-        [Produces("application/json")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> CreateAsync([FromBody] AddCommentRequest request)
-        {
-            await base.Mediator.Send(request);
-            return Ok();
-        }
+        //// Allow anonymous users to leave the comments. Those comments will not be visible until they are reviewed and approved
+        //[HttpPost]
+        //[Produces("application/json")]
+        //[ProducesResponseType(StatusCodes.Status200OK)]
+        //[ProducesResponseType(StatusCodes.Status400BadRequest)]
+        //public async Task<IActionResult> CreateAsync([FromBody] AddCommentRequest request)
+        //{
+        //    await base.Mediator.Send(request);
+        //    return Ok();
+        //}
 
 
         [Authorize(Policy = PolicyNames.REVIEW_COMMENTS_POLICY)]
