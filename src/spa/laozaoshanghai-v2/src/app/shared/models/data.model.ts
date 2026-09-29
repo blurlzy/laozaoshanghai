@@ -42,3 +42,9 @@ export enum SidenavViewOptions {
 	contenteDetails = 1,
 	contentComments = 2
 }
+
+// site update log entry (GET api/activities/site)
+export interface SiteActivity {
+	text: string;
+	dateCreated: string;
+}

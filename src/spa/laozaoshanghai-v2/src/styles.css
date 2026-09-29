@@ -154,7 +154,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   display: grid; grid-template-columns: repeat(3, auto); gap: 2px 34px;
 }
 .menu-district {
-  position: relative; padding: 6px 0 9px; white-space: nowrap;
+  position: relative; display: inline-block; padding: 6px 0 9px; white-space: nowrap;
   font-family: var(--f-display); font-weight: 500; font-size: 22px; letter-spacing: .06em; transition: color .3s;
 }
 .menu-district sup { font-family: var(--f-latin); font-style: italic; font-weight: 400; font-size: 13px; letter-spacing: 0; margin-left: 4px; color: var(--ink-3); }

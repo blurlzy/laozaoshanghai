@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { ContentItem, Comment } from '../shared/models/data.model';
+import { ContentItem, Comment, SiteActivity } from '../shared/models/data.model';
 import { PagedList } from '../shared/models/paged-list.model';
 import { environment } from '../../environments/environment';
 
@@ -47,8 +47,8 @@ export class DataService {
 	}
 
 	// get site updats
-	getSiteUpdates(): Observable<any> {
-		return this.httpClient.get<any>(this.activityApiEndpoint + '/site');
+	getSiteUpdates(): Observable<SiteActivity[]> {
+		return this.httpClient.get<SiteActivity[]>(this.activityApiEndpoint + '/site');
 	}
 
 	// send message

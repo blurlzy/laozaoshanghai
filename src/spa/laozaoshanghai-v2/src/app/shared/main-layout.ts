@@ -1,12 +1,12 @@
-import { Component, DestroyRef, effect, inject, signal } from '@angular/core';
+import { Component, DestroyRef, computed, effect, inject, signal } from '@angular/core';
 import { CommonModule, DOCUMENT } from '@angular/common';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { ActivatedRoute, RouterOutlet, Router } from '@angular/router';
+import { ActivatedRoute, RouterLink, RouterLinkActive, RouterOutlet, Router } from '@angular/router';
 import { map } from 'rxjs';
 // components
 import { Footer } from './footer';
 @Component({
-  imports: [CommonModule, RouterOutlet, Footer],
+  imports: [CommonModule, RouterOutlet, RouterLink, RouterLinkActive, Footer],
   selector: 'app-main-layout',
   host: {
     '(document:click)': 'onDocumentClick($event)',
@@ -16,7 +16,7 @@ import { Footer } from './footer';
   styles: ``,
   template: ` 
   <header class="masthead" id="top" [class.is-scrolled]="isScrolled()">
-    <a class="brand" href="#" aria-label="老早上海 · 首页">
+    <a class="brand" routerLink="/" aria-label="老早上海 · 首页">
       <span class="seal seal--sm" aria-hidden="true">
         <svg viewBox="0 0 100 100"><g filter="url(#seal-grain)">
           <rect x="4" y="4" width="92" height="92" rx="7" fill="var(--cinnabar)"></rect>
@@ -28,51 +28,48 @@ import { Footer } from './footer';
       <span class="brand__text">老早上海<em>laozaoshanghai.com</em></span>
     </a>
 
-    <nav class="nav" id="mainNav" aria-label="主导航">
-      <div class="nav__group" data-type="era" [class.is-open]="openMenu() === 'era'">
+    <nav class="nav" aria-label="主导航">
+      <div class="nav__group" data-type="era" [class.is-open]="openMenu() === 'era'" [class.is-current]="activeGroup() === 'era'">
         <button class="nav__trigger" type="button"
           [attr.aria-expanded]="openMenu() === 'era'" aria-controls="menuEras"
           (click)="toggleMenu('era')">年代</button>
-        <div class="nav__panel nav__panel--eras" id="menuEras">
+        <div class="nav__panel nav__panel--eras">
           <p class="nav__panel-note">按年代 · 由近及远</p>
-          <ul class="menu-eras" id="eraMenu">
-            <li><button class="menu-era" type="button" data-type="era" data-key="00年"><b>〇〇</b><small>年前后</small></button></li>
-            <li><button class="menu-era" type="button" data-type="era" data-key="90年代"><b>九〇</b><small>年代</small></button></li>
-            <li><button class="menu-era" type="button" data-type="era" data-key="80年代"><b>八〇</b><small>年代</small></button></li>
-            <li><button class="menu-era" type="button" data-type="era" data-key="70年代"><b>七〇</b><small>年代</small></button></li>
-            <li><button class="menu-era" type="button" data-type="era" data-key="60年代"><b>六〇</b><small>年代</small></button></li>
-            <li><button class="menu-era" type="button" data-type="era" data-key="民国"><b>民國</b><small>时期</small></button></li>
+          <ul class="menu-eras">
+            @for (era of eras; track era.key) {
+              <li>
+                <a class="menu-era" routerLink="/" [queryParams]="filterParams(era.key)"
+                  [class.is-active]="currentKeyword() === era.key"
+                  [attr.aria-current]="currentKeyword() === era.key ? 'page' : null"><b>{{ era.label }}</b><small>{{ era.sub }}</small></a>
+              </li>
+            }
           </ul>
         </div>
       </div>
-      <div class="nav__group" data-type="district" [class.is-open]="openMenu() === 'district'">
+      <div class="nav__group" data-type="district" [class.is-open]="openMenu() === 'district'" [class.is-current]="activeGroup() === 'district'">
         <button class="nav__trigger" type="button"
-          [attr.aria-expanded]="openMenu() === 'district'" aria-controls="menuDistricts"
+          [attr.aria-expanded]="openMenu() === 'district'"
           (click)="toggleMenu('district')">地区</button>
-        <div class="nav__panel nav__panel--districts" id="menuDistricts">
+        <div class="nav__panel nav__panel--districts">
           <p class="nav__panel-note">旧区名 · 以当年为准</p>
-          <ul class="menu-districts" id="districtMenu">
-            <li><button class="menu-district" type="button" data-type="district" data-key="黄浦">黄浦</button></li>
-            <li><button class="menu-district" type="button" data-type="district" data-key="静安">静安</button></li>
-            <li><button class="menu-district" type="button" data-type="district" data-key="卢湾">卢湾</button></li>
-            <li><button class="menu-district" type="button" data-type="district" data-key="徐汇">徐汇</button></li>
-            <li><button class="menu-district" type="button" data-type="district" data-key="虹口">虹口</button></li>
-            <li><button class="menu-district" type="button" data-type="district" data-key="长宁">长宁</button></li>
-            <li><button class="menu-district" type="button" data-type="district" data-key="南市">南市</button></li>
-            <li><button class="menu-district" type="button" data-type="district" data-key="杨浦">杨浦</button></li>
-            <li><button class="menu-district" type="button" data-type="district" data-key="闸北">闸北</button></li>
-            <li><button class="menu-district" type="button" data-type="district" data-key="普陀">普陀</button></li>
-            <li><button class="menu-district" type="button" data-type="district" data-key="浦东">浦东</button></li>
+          <ul class="menu-districts">
+            @for (district of districts; track district) {
+              <li>
+                <a class="menu-district" routerLink="/" [queryParams]="filterParams(district)"
+                  [class.is-active]="currentKeyword() === district"
+                  [attr.aria-current]="currentKeyword() === district ? 'page' : null">{{ district }}</a>
+              </li>
+            }
           </ul>
         </div>
       </div>
       <!-- <a href="#archive">旧影</a> -->
-      <a href="#/about">关于</a>
+      <a routerLink="/about" routerLinkActive="is-current" ariaCurrentWhenActive="page">关于</a>
     </nav>
 
     <form class="search" role="search" (submit)="search($event, q)">
       <label for="q" class="sr-only">搜索</label>
-      <input #q id="q" name="q" type="search" placeholder="搜索…" autocomplete="off" [value]="currentKeyword()">
+      <input #q type="search" placeholder="搜索…" autocomplete="off" [value]="currentKeyword()">
       <button type="submit" aria-label="搜索">
         <svg viewBox="0 0 24 24" aria-hidden="true">
           <circle cx="10.5" cy="10.5" r="6.5"></circle>
@@ -111,10 +108,34 @@ export class MainLayout {
     { initialValue: '' },
   );
 
+  /** Menu filters; `key` is the tag sent as ?keyword= to the API. */
+  readonly eras = [
+    { key: '00年', label: '〇〇', sub: '年前后' },
+    { key: '90年代', label: '九〇', sub: '年代' },
+    { key: '80年代', label: '八〇', sub: '年代' },
+    { key: '70年代', label: '七〇', sub: '年代' },
+    { key: '60年代', label: '六〇', sub: '年代' },
+    { key: '民国', label: '民國', sub: '时期' },
+  ];
+  readonly districts = ['黄浦', '静安', '卢湾', '徐汇', '虹口', '长宁', '南市', '杨浦', '闸北', '普陀', '浦东'];
+
+  /** Which menu contains the active filter, so its trigger can be highlighted. */
+  readonly activeGroup = computed(() => {
+    const keyword = this.currentKeyword();
+    if (this.eras.some(era => era.key === keyword)) return 'era';
+    if (this.districts.includes(keyword)) return 'district';
+    return null;
+  });
+
   constructor() {
     const body = inject(DOCUMENT).body;
     effect(() => body.classList.toggle('nav-open', this.navOpen()));
     inject(DestroyRef).onDestroy(() => body.classList.remove('nav-open'));
+  }
+
+  /** Links to the filtered list; picking the active filter again clears it (like the design). */
+  filterParams(key: string): { keyword: string | null } {
+    return { keyword: this.currentKeyword() === key ? null : key };
   }
 
   onScroll(): void {
@@ -149,7 +170,7 @@ export class MainLayout {
   // Close when clicking outside a nav group, or after picking an item inside a panel.
   onDocumentClick(event: MouseEvent): void {
     const target = event.target as HTMLElement | null;
-    const pickedItem = !!target?.closest('.nav__panel button, .nav > a');
+    const pickedItem = !!target?.closest('.nav__panel a, .nav__panel button, .nav > a');
 
     if (this.navOpen() && pickedItem) {
       this.closeNav();
