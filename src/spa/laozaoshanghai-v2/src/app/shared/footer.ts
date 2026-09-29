@@ -25,7 +25,7 @@ import { Component } from '@angular/core';
     </svg>
     <div class="footer__row">
       <span>© 老早上海 laozaoshanghai.com</span>
-      <span class="footer__mid"> Follow us @ X</span>
+      <span class="footer__mid"> <a href="https://x.com/laozaoshanghai" target="_blank" rel="noopener">Follow us @ X</a>    </span>
       <a href="#top" (click)="scrollToTop($event)">回到卷首 ↑</a>
     </div>
   </footer>  
