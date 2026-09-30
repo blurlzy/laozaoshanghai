@@ -1,5 +1,4 @@
 import { Component, DestroyRef, ElementRef, afterNextRender, computed, inject, input, linkedSignal, output, viewChild } from '@angular/core';
-import { DOCUMENT } from '@angular/common';
 import { Router } from '@angular/router';
 import { ContentItem } from '../shared/models/data.model';
 
@@ -109,16 +108,23 @@ export class CardDetail {
   // });
 
   constructor() {
-    const root = inject(DOCUMENT).documentElement;
+    let opened: HTMLDialogElement | null = null;
 
+    // Page scroll is locked in CSS (html:has(dialog.viewer[open])), so the lock always matches
+    // the dialog's real state and can't get stuck after it closes.
     afterNextRender(() => {
-      this.dialog().nativeElement.showModal();
-      root.style.overflow = 'hidden';
+      opened = this.dialog().nativeElement;
+      opened.showModal();
       // Focus the photo so arrow keys work without a focus ring on ‹.
       this.figure().nativeElement.focus({ preventScroll: true });
     });
 
-    inject(DestroyRef).onDestroy(() => (root.style.overflow = ''));
+    // Never remove a still-open modal dialog (e.g. navigating Back while it's showing),
+    // which some mobile browsers leave behind as an invisible, page-blocking layer.
+    inject(DestroyRef).onDestroy(() => {
+      this.hasClosed = true;
+      if (opened?.open) opened.close();
+    });
   }
 
   showFrame(index: number): void {

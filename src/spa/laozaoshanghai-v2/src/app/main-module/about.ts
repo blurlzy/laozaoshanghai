@@ -32,13 +32,13 @@ function groupByYear(activities: SiteActivity[] | null): LogYear[] {
 @Component({
   imports: [],
   selector: 'app-about',
-  host: { '(document:keydown.escape)': 'onEscape($event)' },
+  //host: { '(document:keydown.escape)': 'onEscape($event)' },
   styles: ``,
   template: ` 
 <div class="view page-about" data-view="about">
-      <button class="page-close" type="button" aria-label="关闭，返回旧影" title="关闭 (Esc)" (click)="close()">
+     <!-- <button class="page-close" type="button" aria-label="关闭，返回旧影" title="关闭 (Esc)" (click)="close()">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"></path></svg>
-      </button>
+      </button> -->
       <section class="about" aria-labelledby="aboutTitle">
         <h1 class="about__title">老早<br>关于</h1>
         <div class="about__body">
@@ -113,18 +113,18 @@ export class About {
     afterNextRender(() => window.scrollTo({ top: 0, behavior: 'instant' }));
   }
 
-  close(): void {
-    if (this.cameFromApp) {
-      this.location.back();
-    } else {
-      this.router.navigate(['/']);
-    }
-  }
+  // close(): void {
+  //   if (this.cameFromApp) {
+  //     this.location.back();
+  //   } else {
+  //     this.router.navigate(['/']);
+  //   }
+  // }
 
-  onEscape(event: Event): void {
-    // Let Esc close an open menu or leave a form field first, like the design.
-    if ((event.target as HTMLElement | null)?.closest?.('input, textarea, select')) return;
-    if (document.querySelector('.nav__group.is-open') || document.body.classList.contains('nav-open')) return;
-    this.close();
-  }
+  // onEscape(event: Event): void {
+  //   // Let Esc close an open menu or leave a form field first, like the design.
+  //   if ((event.target as HTMLElement | null)?.closest?.('input, textarea, select')) return;
+  //   if (document.querySelector('.nav__group.is-open') || document.body.classList.contains('nav-open')) return;
+  //   this.close();
+  // }
 }

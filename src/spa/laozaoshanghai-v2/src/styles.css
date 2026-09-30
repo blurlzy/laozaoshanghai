@@ -255,34 +255,20 @@ body.nav-open .menu-btn i:last-child { transform: translateY(-3.5px) rotate(-45d
   font-family: var(--f-display); font-weight: 900;
   font-size: clamp(56px, 7vw, 120px); line-height: 1; letter-spacing: .02em;
 }
-.hero__title span {
-  display: inline-block; opacity: 0;
-  animation: inkIn 1.6s calc(.35s + var(--i) * .2s) var(--ease) forwards;
-}
-@keyframes inkIn {
-  0%   { opacity: 0; filter: blur(14px); transform: translateY(-.08em) scale(1.04); }
-  55%  { opacity: .9; }
-  100% { opacity: 1; filter: blur(0); transform: none; }
-}
+.hero__title span { display: inline-block; }
 .hero__years {
   margin: .4em 0 0; writing-mode: vertical-rl;
   font-family: var(--f-display); font-weight: 300; font-size: 14px; letter-spacing: .55em; color: var(--ink-3);
-  opacity: 0; animation: fade 1.2s 1.3s var(--ease) forwards;
 }
 .hero__title-wrap .stamp {
   position: absolute; left: -26px; bottom: -84px;
-  opacity: 0; animation: stamp .7s 1.55s cubic-bezier(.3, 1.6, .5, 1) forwards;
-}
-@keyframes stamp {
-  from { opacity: 0; transform: scale(1.7) rotate(-14deg); }
-  to   { opacity: .95; transform: scale(1) rotate(-4deg); }
+  opacity: .95; transform: rotate(-4deg);
 }
 
 .hero__foot {
   grid-column: 2; grid-row: 2;
   display: grid; grid-template-columns: auto 1fr auto; align-items: end; gap: clamp(16px, 2vw, 32px);
   padding-top: 28px;
-  opacity: 0; animation: fade 1.4s 1.5s var(--ease) forwards;
 }
 .hero__count { margin: 0; display: flex; align-items: baseline; gap: 10px; }
 .hero__count > :empty { display: none; }
@@ -497,9 +483,11 @@ body.nav-open .menu-btn i:last-child { transform: translateY(-3.5px) rotate(-45d
 .admin-btn--sm { padding: 4px 10px; font-size: 13px; letter-spacing: .12em; }
 
 /* ─────────── Viewer ─────────── */
+/* Lock page scroll only while the viewer is open; the lock lifts automatically when it closes or is removed. */
+html:has(dialog.viewer[open]) { overflow: hidden; }
 .viewer {
   width: 100vw; height: 100dvh; max-width: none; max-height: none; margin: 0; padding: 0; border: 0;
-  background: var(--paper); color: var(--ink); overflow: hidden;
+  background: var(--paper); color: var(--ink); overflow: hidden; overscroll-behavior: contain;
 }
 .viewer::backdrop { background: rgba(21, 20, 18, .5); }
 .viewer[open] { animation: viewerIn .6s var(--ease); }
@@ -529,7 +517,7 @@ body.nav-open .menu-btn i:last-child { transform: translateY(-3.5px) rotate(-45d
 .viewer__thumbs button[aria-current="true"] { opacity: 1; box-shadow: 0 2px 0 var(--cinnabar); }
 .viewer__thumbs button:hover { opacity: 1; }
 
-.viewer__side { border-left: 1px solid var(--line); padding: 72px 40px 32px; overflow-y: auto; display: flex; flex-direction: column; gap: 26px; }
+.viewer__side { border-left: 1px solid var(--line); padding: 72px 40px 32px; overflow-y: auto; overscroll-behavior: contain; display: flex; flex-direction: column; gap: 26px; }
 .viewer__num { margin: 0; font-family: var(--f-latin); font-style: italic; font-size: 18px; color: var(--ink-3); }
 .viewer__text { margin: 0; font-family: var(--f-display); font-weight: 500; font-size: 20px; line-height: 1.9; letter-spacing: .04em; }
 .viewer__text.is-vertical {
@@ -659,7 +647,7 @@ body.nav-open .menu-btn i:last-child { transform: translateY(-3.5px) rotate(-45d
   .log__item { grid-template-columns: 1fr; gap: 2px; padding: 12px 0 12px 22px; }
   .log__item::before { top: 21px; }
 
-  .viewer__inner { grid-template-columns: 1fr; grid-template-rows: auto auto; overflow-y: auto; }
+  .viewer__inner { grid-template-columns: 1fr; grid-template-rows: auto auto; overflow-y: auto; overscroll-behavior: contain; }
   .viewer__stage { padding: 64px 12px 12px; }
   .viewer__figure img { max-height: 62dvh; }
   .viewer__nav { width: 40px; font-size: 40px; }
