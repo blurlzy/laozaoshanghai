@@ -647,8 +647,11 @@ html:has(dialog.viewer[open]) { overflow: hidden; }
   .log__item { grid-template-columns: 1fr; gap: 2px; padding: 12px 0 12px 22px; }
   .log__item::before { top: 21px; }
 
-  .viewer__inner { grid-template-columns: 1fr; grid-template-rows: auto auto; overflow-y: auto; overscroll-behavior: contain; }
-  .viewer__stage { padding: 64px 12px 12px; }
+  /* Rows take their content's height (min-height: auto) and the viewer scrolls, instead of squeezing
+     the photo row to fit one screen and letting a tall photo spill over the text. */
+  .viewer__inner { grid-template-columns: 1fr; grid-template-rows: auto auto; align-content: start; overflow-y: auto; overscroll-behavior: contain; }
+  .viewer__stage { padding: 64px 12px 12px; grid-template-rows: auto auto; min-height: auto; }
+  .viewer__figure { min-height: auto; }
   .viewer__figure img { max-height: 62dvh; }
   .viewer__nav { width: 40px; font-size: 40px; }
   .viewer__side { border-left: 0; border-top: 1px solid var(--line); padding: 28px 22px 60px; overflow: visible; }

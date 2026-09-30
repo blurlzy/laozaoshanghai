@@ -52,7 +52,7 @@ import { ContentItem } from '../shared/models/data.model';
           }
         </ul>
         <div class="viewer__actions">
-          <button type="button">分享</button>
+          <!-- <button type="button">分享</button> -->
           <a [href]="currentUrl()" target="_blank" rel="noopener">原图</a>
         </div>
         <!-- <section class="viewer__comments" aria-label="留言">
