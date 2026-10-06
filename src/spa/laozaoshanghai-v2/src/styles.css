@@ -432,6 +432,9 @@ body.nav-open .menu-btn i:last-child { transform: translateY(-3.5px) rotate(-45d
   display: grid; grid-template-columns: minmax(0, 1fr);
   max-width: 960px; margin: 0 auto; padding: 0 var(--gutter) clamp(80px, 12vh, 140px);
 }
+.about-ad { margin-bottom: clamp(40px, 6vh, 72px); }
+/* No gap left behind when AdSense has no ad to show. */
+.about-ad:has(ins.adsbygoogle[data-ad-status="unfilled"]) { margin-bottom: 0; }
 .block-head {
   display: flex; align-items: baseline; justify-content: space-between; gap: 16px;
   padding-bottom: 14px; margin-bottom: 26px; border-bottom: 1px solid var(--ink);

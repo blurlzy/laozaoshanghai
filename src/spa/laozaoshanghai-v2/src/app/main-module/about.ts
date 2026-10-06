@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { catchError, map, of } from 'rxjs';
 import { DataService } from './data.service';
 import { SiteActivity } from '../shared/models/data.model';
+import { GoogleAds } from '../shared/google-ads';
 
 interface LogItem { isoDate: string; label: string; text: string; }
 interface LogYear { year: number; items: LogItem[]; }
@@ -30,7 +31,7 @@ function groupByYear(activities: SiteActivity[] | null): LogYear[] {
 }
 
 @Component({
-  imports: [],
+  imports: [GoogleAds],
   selector: 'app-about',
   //host: { '(document:keydown.escape)': 'onEscape($event)' },
   styles: ``,
@@ -58,6 +59,8 @@ function groupByYear(activities: SiteActivity[] | null): LogYear[] {
       </section>
 
       <div class="about-grid">
+        <app-google-ads class="about-ad" />
+
         <!-- Site updates: GET api/activities/site -->
         <section class="updates" aria-labelledby="updatesTitle">
           <header class="block-head">
